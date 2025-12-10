@@ -15,8 +15,28 @@ body {
 
 h1 {
   text-align: center;
-  color: #ff0000; /* piros főcím */
-  margin-bottom: 40px;
+  color: #ff0000;
+  margin-bottom: 15px;
+}
+
+/* === ÚJ: gombok === */
+.sort-buttons {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.sort-buttons button {
+  background: #1E5BAB;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  margin: 0 6px;
+  border-radius: 8px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sort-buttons button:hover {
+  background: #174a8f;
 }
 
 #gallery {
@@ -34,44 +54,29 @@ h1 {
   padding: 18px 24px;
   margin-bottom: 15px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: box-shadow 0.3s ease;
 }
-.banknote:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
 
 .number { font-size: 1.3em; font-weight: 700; color: #1E5BAB; margin-right: 8px; }
 .info { flex: 1; line-height: 1.45em; font-size: 0.95em; color: #333; }
 
-/* Címek fekete maradnak */
-.info p strong {
-  color: #000;
-}
+.info p strong { color: #000; }
 
-/* Ország érték kék */
 .info .orszag span {
   font-weight: 700;
   color: #1E5BAB;
-  font-size: 1.05em;
 }
 
-/* Ár érték piros */
 .info .ar span {
   font-weight: 700;
   color: #ff0000;
-  font-size: 1.06em;
 }
 
-/* Állapot érték sötétzöld */
-.info .status-value {
-  color: #006400;
-  font-weight: 700;
-}
+.status-value { color: #006400; font-weight: 700; }
 
 .statusz {
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 6px;
-  display: inline-block;
-  margin-top: 4px;
 }
 .statusz.elerheto { background: #dbffdb; color: #0a7a0a; }
 .statusz.ELKELT { background: #ffd3d3; color: #b30000; }
@@ -88,15 +93,8 @@ h1 {
   width: 45%;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-}
-.images img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(0,0,0,0.25);
 }
 
-/* ELKELT vízjel */
 .images .watermark {
   position: absolute;
   top: 50%;
@@ -104,75 +102,71 @@ h1 {
   transform: translate(-50%, -50%) rotate(-20deg);
   font-size: 2.6em;
   font-weight: 900;
-  color: rgba(255, 0, 0, 0.55);
-  pointer-events: none;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+  color: rgba(255,0,0,0.55);
 }
 
-/* Felugró nagyítás */
 .modal {
   display: none;
   position: fixed;
-  z-index: 10;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.9);
+  inset: 0;
+  background: rgba(0,0,0,0.9);
 }
 .modal img {
-  display: block;
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   max-width: 96vw;
   max-height: 92vh;
-  border-radius: 8px;
 }
 .close {
   position: fixed;
-  top: 20px; right: 40px;
+  top: 20px;
+  right: 40px;
   color: white;
   font-size: 2em;
   cursor: pointer;
 }
 </style>
-
 </head>
+
 <body>
 
 <h1>Eladó Bankjegyeim</h1>
+
+<!-- ✅ ÚJ GOMBOK -->
+<div class="sort-buttons">
+  <button onclick="sortByCountry()">Országok (ABC)</button>
+  <button onclick="sortByPrice()">Árak (emelkedő)</button>
+</div>
+
 <div id="gallery"></div>
 
 <div id="modal" class="modal" onclick="closeModal()">
-  <span class="close" onclick="closeModal()">&times;</span>
+  <span class="close">&times;</span>
   <img id="modal-img" alt="">
 </div>
 
 <script>
-let cards = [];
-
 fetch('bankjegyek.csv')
   .then(res => res.text())
   .then(data => {
     const rows = data.replace(/\r/g, '').trim().split('\n').slice(1);
     const gallery = document.getElementById('gallery');
 
-    rows.forEach((row, index) => {
+    rows.forEach(row => {
       const [sorsz, orszag, cimlet, ev, allapot, leiras, ar, statusz, elolap, hatlap] = row.split(';');
       if (!orszag) return;
 
       const card = document.createElement('div');
       card.className = 'banknote';
 
-      // ✅ CSAK METAADAT – NEM NYÚLUNK A TARTALOMHOZ
       card.dataset.country = orszag.toLowerCase();
-      card.dataset.price = parseInt(ar.replace(/\D/g, '')) || 0;
-      card.dataset.original = index;
+      card.dataset.price = parseFloat(ar.replace(/[^\d]/g, '')) || 0;
 
       const isSold = statusz.trim().toUpperCase() === "ELKELT";
 
       card.innerHTML = `
         <div class="number">${sorsz}.</div>
-
         <div class="info">
           <p class="orszag"><strong>Ország:</strong> <span>${orszag}</span></p>
           <p><strong>Címlet:</strong> ${cimlet}</p>
@@ -182,36 +176,36 @@ fetch('bankjegyek.csv')
           <p class="ar"><strong>Ár:</strong> <span>${ar}</span></p>
           <p class="statusz ${statusz}">${statusz}</p>
         </div>
-
         <div class="images">
           ${isSold ? '<div class="watermark">ELKELT</div>' : ''}
-          <img src="${elolap.trim()}" alt="Előlap" onclick="openModal(this)">
-          <img src="${hatlap.trim()}" alt="Hátlap" onclick="openModal(this)">
+          <img src="${elolap.trim()}" onclick="openModal(this)">
+          <img src="${hatlap.trim()}" onclick="openModal(this)">
         </div>
       `;
-
       gallery.appendChild(card);
-      cards.push(card);
     });
   });
 
-/* ===== GOMB FUNKCIÓK (NEM RENDEZIK ÁT A DOM-OT) ===== */
-document.getElementById('btn-country').onclick = () =>
-  cards.forEach(c => c.style.order = c.dataset.country);
+function sortByCountry() {
+  const gallery = document.getElementById('gallery');
+  [...gallery.children]
+    .sort((a,b) => a.dataset.country.localeCompare(b.dataset.country, 'hu'))
+    .forEach(el => gallery.appendChild(el));
+}
 
-document.getElementById('btn-price').onclick = () =>
-  cards.forEach(c => c.style.order = c.dataset.price);
-
-document.getElementById('btn-reset').onclick = () =>
-  cards.forEach(c => c.style.order = c.dataset.original);
+function sortByPrice() {
+  const gallery = document.getElementById('gallery');
+  [...gallery.children]
+    .sort((a,b) => a.dataset.price - b.dataset.price)
+    .forEach(el => gallery.appendChild(el));
+}
 
 function openModal(img) {
-  const modal = document.getElementById('modal');
+  document.getElementById('modal').style.display = "block";
   document.getElementById('modal-img').src = img.src;
-  modal.style.display = "block";
 }
 function closeModal() {
-  document.getElementById("modal").style.display = "none";
+  document.getElementById('modal').style.display = "none";
 }
 </script>
 
