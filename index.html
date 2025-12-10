@@ -148,7 +148,7 @@ h1 {
 
 <div id="modal" class="modal" onclick="closeModal()">
   <span class="close">&times;</span>
-  <img id="modal-img">
+  <img id="modal-img" alt="">
 </div>
 
 <script>
@@ -162,9 +162,81 @@ fetch('bankjegyek.csv')
     const [sorsz,orszag,cimlet,ev,allapot,leiras,ar,statusz,elolap,hatlap] = row.split(';');
     if(!orszag) return;
 
-    // státusz normalizálása (kisbetűs osztálynév)
-    const statusClass = statusz.trim().toLowerCase()
+    const statusClass = statusz
+      .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g,'');
 
-    const
+    const card = document.createElement('div');
+    card.className = 'banknote';
+    card.dataset.country = orszag.toLowerCase();
+    card.dataset.price = parseFloat(ar.replace(/[^\d]/g,'')) || 0;
+    card.dataset.original = index;
+
+    const isSold = statusClass === "elkelt";
+
+    card.innerHTML = `
+      <div class="number">${sorsz}.</div>
+      <div class="info">
+        <p class="orszag"><strong>Ország:</strong> <span>${orszag}</span></p>
+        <p><strong>Címlet:</strong> ${cimlet}</p>
+        <p><strong>Évjárat:</strong> ${ev}</p>
+        <p><strong>Állapot:</strong> <span class="status-value">${allapot}</span></p>
+        <p><strong>Leírás:</strong> ${leiras}</p>
+        <p class="ar"><strong>Ár:</strong> <span>${ar}</span></p>
+        <p class="statusz ${statusClass}">${statusz}</p>
+      </div>
+      <div class="images">
+        ${isSold ? '<div class="watermark">ELKELT</div>' : ''}
+        <img src="${elolap.trim()}" onclick="openModal(this)">
+        <img src="${hatlap.trim()}" onclick="openModal(this)">
+      </div>
+    `;
+    gallery.appendChild(card);
+  });
+});
+
+function sortByCountry(){
+  const g=document.getElementById('gallery');
+  [...g.children].sort((a,b)=>a.dataset.country.localeCompare(b.dataset.country,'hu')).forEach(e=>g.appendChild(e));
+}
+function sortByPrice(){
+  const g=document.getElementById('gallery');
+  [...g.children].sort((a,b)=>a.dataset.price-b.dataset.price).forEach(e=>g.appendChild(e));
+}
+function sortByOriginal(){
+  const g=document.getElementById('gallery');
+  [...g.children].sort((a,b)=>a.dataset.original-b.dataset.original).forEach(e=>g.appendChild(e));
+}
+
+// Összesített ár számolása csak elérhető tételekre
+let sumVisible=false;
+document.getElementById('sum-button').onclick=()=>{
+  const d=document.getElementById('sum-display');
+  if(sumVisible){ 
+    d.textContent=''; 
+    sumVisible=false; 
+  } else {
+    let total=0;
+    [...document.getElementById('gallery').children].forEach(c=>{
+      const isSold = c.querySelector('.statusz').classList.contains('elkelt');
+      if(!isSold){
+        total += parseFloat(c.dataset.price)||0;
+      }
+    });
+    d.textContent=total.toLocaleString('hu-HU')+' Ft';
+    sumVisible=true;
+  }
+};
+
+function openModal(img){
+  document.getElementById('modal').style.display="block";
+  document.getElementById('modal-img').src=img.src;
+}
+function closeModal(){
+  document.getElementById('modal').style.display="none";
+}
+</script>
+
+</body>
+</html>
