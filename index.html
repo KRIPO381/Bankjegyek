@@ -14,34 +14,26 @@ body {
 }
 
 h1 {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   color: #ff0000;
   margin-bottom: 15px;
 }
 
-/* Diszkrét gomb a főcím mellett */
 #sum-button {
-  background:#e0e0e0;  /* halvány szürke */
-  color:#333;           /* sötétszürke szöveg */
+  background:#e0e0e0;
+  color:#333;
   border:none;
   border-radius:4px;
-  padding:2px 6px;      /* kisebb gomb */
-  font-size:0.9em;      /* kisebb betű */
+  padding:2px 6px;
+  font-size:0.9em;
   cursor:pointer;
   font-weight:bold;
 }
-#sum-button:hover {
-  background:#d0d0d0;   /* kicsit sötétebb hover */
-}
-#sum-display {
-  font-weight:600;
-  margin-left:5px;
-}
+#sum-button:hover { background:#d0d0d0; }
 
-/* Rendező gombok */
 .sort-buttons {
   text-align: center;
   margin-bottom: 30px;
@@ -68,8 +60,6 @@ h1 {
 
 .banknote {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
   gap: 14px;
   background: white;
   border-radius: 12px;
@@ -78,64 +68,62 @@ h1 {
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-.number { font-size: 1.3em; font-weight: 700; color: #1E5BAB; margin-right: 8px; }
-.info { flex: 1; line-height: 1.45em; font-size: 0.95em; color: #333; }
+.number { font-size: 1.3em; font-weight: 700; color: #1E5BAB; }
+.info { flex: 1; font-size: 0.95em; color: #333; }
 
-.info p strong { color: #000; }
-.info .orszag span { font-weight: 700; color: #1E5BAB; }
-.info .ar span { font-weight: 700; color: #ff0000; }
-.status-value { color: #006400; font-weight: 700; }
+.info .orszag span { font-weight:700; color:#1E5BAB; }
+.info .ar span { font-weight:700; color:#ff0000; }
+.status-value { color:#006400; font-weight:700; }
 
 .statusz {
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
+  font-weight:700;
+  padding:3px 8px;
+  border-radius:6px;
+  display:inline-block;
 }
-.statusz.elerheto { background: #dbffdb; color: #0a7a0a; }
-.statusz.ELKELT { background: #ffd3d3; color: #b30000; }
+.statusz.elérhető { background:#dbffdb; color:#0a7a0a; }
+.statusz.ELKELT { background:#ffd3d3; color:#b30000; }
 
 .images {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  position: relative;
+  flex:1;
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  position:relative;
 }
 .images img {
-  width: 45%;
-  border-radius: 8px;
-  cursor: pointer;
+  width:45%;
+  border-radius:8px;
+  cursor:pointer;
 }
 .images .watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-20deg);
-  font-size: 2.6em;
-  font-weight: 900;
-  color: rgba(255,0,0,0.55);
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%) rotate(-20deg);
+  font-size:2.6em;
+  font-weight:900;
+  color:rgba(255,0,0,0.55);
 }
 
 .modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
 }
 .modal img {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 96vw;
-  max-height: 92vh;
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  max-width:96vw;
+  max-height:92vh;
 }
 .close {
-  position: fixed;
-  top: 20px;
-  right: 40px;
-  color: white;
-  font-size: 2em;
-  cursor: pointer;
+  position:fixed;
+  top:20px; right:40px;
+  color:white;
+  font-size:2em;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -148,7 +136,6 @@ h1 {
   <span id="sum-display"></span>
 </h1>
 
-<!-- Rendező gombok -->
 <div class="sort-buttons">
   <button onclick="sortByCountry()">Országok (ABC)</button>
   <button onclick="sortByPrice()">Árak (emelkedő)</button>
@@ -163,23 +150,34 @@ h1 {
 </div>
 
 <script>
+/* === ÉKEZET JAVÍTÓ === */
+function normalizeText(text){
+  if(!text) return '';
+  return text
+    .replace(/elerheto/i, 'elérhető')
+    .replace(/Elérhetö/i, 'elérhető')
+    .replace(/elÃ©rhetÅ‘/i, 'elérhető')
+    .replace(/elkelt/i, 'ELKELT');
+}
+
 fetch('bankjegyek.csv')
   .then(res => res.text())
   .then(data => {
-    const rows = data.replace(/\r/g, '').trim().split('\n').slice(1);
+    const rows = data.replace(/\r/g,'').trim().split('\n').slice(1);
     const gallery = document.getElementById('gallery');
 
     rows.forEach((row, index) => {
-      const [sorsz, orszag, cimlet, ev, allapot, leiras, ar, statusz, elolap, hatlap] = row.split(';');
+      const [sorsz, orszag, cimlet, ev, allapot, leiras, ar, statuszRaw, elolap, hatlap] = row.split(';');
       if (!orszag) return;
 
+      const statusz = normalizeText(statuszRaw.trim());
       const card = document.createElement('div');
       card.className = 'banknote';
       card.dataset.country = orszag.toLowerCase();
-      card.dataset.price = parseFloat(ar.replace(/[^\d]/g, '')) || 0;
+      card.dataset.price = parseFloat(ar.replace(/[^\d]/g,'')) || 0;
       card.dataset.original = index;
 
-      const isSold = statusz.trim().toUpperCase() === "ELKELT";
+      const isSold = statusz === "ELKELT";
 
       card.innerHTML = `
         <div class="number">${sorsz}.</div>
@@ -202,53 +200,36 @@ fetch('bankjegyek.csv')
     });
   });
 
-function sortByCountry() {
-  const gallery = document.getElementById('gallery');
-  [...gallery.children]
-    .sort((a,b) => a.dataset.country.localeCompare(b.dataset.country, 'hu'))
-    .forEach(el => gallery.appendChild(el));
+function sortByCountry(){
+  const g = document.getElementById('gallery');
+  [...g.children].sort((a,b)=>a.dataset.country.localeCompare(b.dataset.country,'hu')).forEach(e=>g.appendChild(e));
+}
+function sortByPrice(){
+  const g = document.getElementById('gallery');
+  [...g.children].sort((a,b)=>a.dataset.price-b.dataset.price).forEach(e=>g.appendChild(e));
+}
+function sortByOriginal(){
+  const g = document.getElementById('gallery');
+  [...g.children].sort((a,b)=>a.dataset.original-b.dataset.original).forEach(e=>g.appendChild(e));
 }
 
-function sortByPrice() {
-  const gallery = document.getElementById('gallery');
-  [...gallery.children]
-    .sort((a,b) => a.dataset.price - b.dataset.price)
-    .forEach(el => gallery.appendChild(el));
-}
+let sumVisible=false;
+document.getElementById('sum-button').onclick=()=>{
+  const d=document.getElementById('sum-display');
+  if(sumVisible){ d.textContent=''; sumVisible=false; return; }
+  let total=0;
+  document.querySelectorAll('.banknote').forEach(c=>total+=Number(c.dataset.price));
+  d.textContent=total.toLocaleString('hu-HU')+' Ft';
+  sumVisible=true;
+};
 
-function sortByOriginal() {
-  const gallery = document.getElementById('gallery');
-  [...gallery.children]
-    .sort((a,b) => (a.dataset.original || 0) - (b.dataset.original || 0))
-    .forEach(el => gallery.appendChild(el));
+function openModal(img){
+  document.getElementById('modal').style.display='block';
+  document.getElementById('modal-img').src=img.src;
 }
-
-// Toggle összesített ár megjelenítés
-let sumVisible = false;
-document.getElementById('sum-button').addEventListener('click', () => {
-  const display = document.getElementById('sum-display');
-  if(sumVisible){
-    display.textContent = '';
-    sumVisible = false;
-  } else {
-    const gallery = document.getElementById('gallery');
-    let total = 0;
-    [...gallery.children].forEach(card => {
-      total += parseFloat(card.dataset.price) || 0;
-    });
-    display.textContent = total.toLocaleString('hu-HU') + ' Ft';
-    sumVisible = true;
-  }
-});
-
-function openModal(img) {
-  document.getElementById('modal').style.display = "block";
-  document.getElementById('modal-img').src = img.src;
-}
-function closeModal() {
-  document.getElementById('modal').style.display = "none";
+function closeModal(){
+  document.getElementById('modal').style.display='none';
 }
 </script>
 
-</body>
-</html>
+</bo
