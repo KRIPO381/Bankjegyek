@@ -14,12 +14,30 @@ body {
 }
 
 h1 {
-  text-align: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
   color: #ff0000;
   margin-bottom: 15px;
 }
 
-/* === GOMBOK === */
+/* Gomb a főcím mellett */
+#sum-button {
+  background:#ffcc00;
+  border:none;
+  border-radius:6px;
+  padding:4px 8px;
+  font-size:1em;
+  cursor:pointer;
+  font-weight:bold;
+}
+#sum-display {
+  font-weight:600;
+  margin-left:5px;
+}
+
+/* Rendező gombok */
 .sort-buttons {
   text-align: center;
   margin-bottom: 30px;
@@ -60,7 +78,6 @@ h1 {
 .info { flex: 1; line-height: 1.45em; font-size: 0.95em; color: #333; }
 
 .info p strong { color: #000; }
-
 .info .orszag span { font-weight: 700; color: #1E5BAB; }
 .info .ar span { font-weight: 700; color: #ff0000; }
 .status-value { color: #006400; font-weight: 700; }
@@ -121,9 +138,13 @@ h1 {
 
 <body>
 
-<h1>Eladó Bankjegyeim</h1>
+<h1>
+  Eladó Bankjegyeim
+  <button id="sum-button">∑</button>
+  <span id="sum-display"></span>
+</h1>
 
-<!-- GOMBOK -->
+<!-- Rendező gombok -->
 <div class="sort-buttons">
   <button onclick="sortByCountry()">Országok (ABC)</button>
   <button onclick="sortByPrice()">Árak (emelkedő)</button>
@@ -138,8 +159,6 @@ h1 {
 </div>
 
 <script>
-let cards = [];
-
 fetch('bankjegyek.csv')
   .then(res => res.text())
   .then(data => {
@@ -152,8 +171,6 @@ fetch('bankjegyek.csv')
 
       const card = document.createElement('div');
       card.className = 'banknote';
-
-      // Metaadatok
       card.dataset.country = orszag.toLowerCase();
       card.dataset.price = parseFloat(ar.replace(/[^\d]/g, '')) || 0;
       card.dataset.original = index;
@@ -178,7 +195,6 @@ fetch('bankjegyek.csv')
         </div>
       `;
       gallery.appendChild(card);
-      cards.push(card);
     });
   });
 
@@ -202,6 +218,24 @@ function sortByOriginal() {
     .sort((a,b) => (a.dataset.original || 0) - (b.dataset.original || 0))
     .forEach(el => gallery.appendChild(el));
 }
+
+// Toggle összesített ár megjelenítés
+let sumVisible = false;
+document.getElementById('sum-button').addEventListener('click', () => {
+  const display = document.getElementById('sum-display');
+  if(sumVisible){
+    display.textContent = '';
+    sumVisible = false;
+  } else {
+    const gallery = document.getElementById('gallery');
+    let total = 0;
+    [...gallery.children].forEach(card => {
+      total += parseFloat(card.dataset.price) || 0;
+    });
+    display.textContent = total.toLocaleString('hu-HU') + ' Ft';
+    sumVisible = true;
+  }
+});
 
 function openModal(img) {
   document.getElementById('modal').style.display = "block";
