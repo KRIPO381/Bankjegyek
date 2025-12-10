@@ -19,22 +19,31 @@ h1 {
   justify-content:center;
   gap:10px;
   color: #ff0000;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-/* Diszkrét összeg gomb – még visszafogottabb */
+/* Diszkrét összeg gomb */
 #sum-button {
-  background:#f1f3f6;  /* szinte a háttérrel azonos */
-  color:#555;           /* halvány sötétszürke */
+  background:#f0f0f0;
+  color:#555;
   border:none;
-  border-radius:3px;
-  padding:1px 4px;      /* apró gomb */
-  font-size:0.8em;      /* kisebb betűméret */
+  border-radius:4px;
+  padding:2px 6px;
+  font-size:0.85em;
   cursor:pointer;
   font-weight:bold;
 }
-#sum-button:hover { background:#e8e8e8; }
+#sum-button:hover { background:#e0e0e0; }
 #sum-display { font-weight:600; margin-left:5px; }
+
+/* Státusz darabszám */
+#status-count {
+  text-align:center;
+  margin-bottom:20px;
+  font-weight:600;
+  color:#1E5BAB;
+  font-size:1em;
+}
 
 /* Rendező gombok */
 .sort-buttons {
@@ -138,6 +147,8 @@ h1 {
   <span id="sum-display"></span>
 </h1>
 
+<div id="status-count"></div>
+
 <div class="sort-buttons">
   <button onclick="sortByCountry()">Országok (ABC)</button>
   <button onclick="sortByPrice()">Árak (emelkedő)</button>
@@ -148,10 +159,25 @@ h1 {
 
 <div id="modal" class="modal" onclick="closeModal()">
   <span class="close">&times;</span>
-  <img id="modal-img">
+  <img id="modal-img" alt="">
 </div>
 
 <script>
+function updateStatusCount() {
+  const gallery = document.getElementById('gallery');
+  let elerheto = 0;
+  let elkelt = 0;
+  [...gallery.children].forEach(card => {
+    const status = card.querySelector('.statusz');
+    if(status){
+      if(status.classList.contains('elerheto')) elerheto++;
+      if(status.classList.contains('elkelt')) elkelt++;
+    }
+  });
+  document.getElementById('status-count').textContent =
+    `Elérhető: ${elerheto} db | Elkelt: ${elkelt} db`;
+}
+
 fetch('bankjegyek.csv')
 .then(res => res.text())
 .then(data => {
@@ -162,10 +188,7 @@ fetch('bankjegyek.csv')
     const [sorsz,orszag,cimlet,ev,allapot,leiras,ar,statusz,elolap,hatlap] = row.split(';');
     if(!orszag) return;
 
-    const statusClass = statusz
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g,'');
+    const statusClass = statusz.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,'');
 
     const card = document.createElement('div');
     card.className = 'banknote';
@@ -194,8 +217,12 @@ fetch('bankjegyek.csv')
     `;
     gallery.appendChild(card);
   });
+
+  // Frissítjük az összesített státusz darabszámot a betöltés után
+  updateStatusCount();
 });
 
+// Rendezés
 function sortByCountry(){
   const g=document.getElementById('gallery');
   [...g.children].sort((a,b)=>a.dataset.country.localeCompare(b.dataset.country,'hu')).forEach(e=>g.appendChild(e));
@@ -209,23 +236,24 @@ function sortByOriginal(){
   [...g.children].sort((a,b)=>a.dataset.original-b.dataset.original).forEach(e=>g.appendChild(e));
 }
 
-// Összegzés csak az elérhető tételekre
+// Összeg gomb (csak elérhető tételek)
 let sumVisible=false;
 document.getElementById('sum-button').onclick=()=>{
   const d=document.getElementById('sum-display');
-  if(sumVisible){ 
-    d.textContent=''; 
-    sumVisible=false; 
-  } else {
+  if(sumVisible){ d.textContent=''; sumVisible=false; }
+  else{
     let t=0;
     [...document.getElementById('gallery').children].forEach(c=>{
-      if(c.querySelector('.statusz.elerheto')) t += parseFloat(c.dataset.price)||0;
+      if(c.querySelector('.statusz').classList.contains('elerheto')){
+        t+=parseFloat(c.dataset.price)||0;
+      }
     });
     d.textContent=t.toLocaleString('hu-HU')+' Ft';
     sumVisible=true;
   }
 };
 
+// Modal képek
 function openModal(img){
   document.getElementById('modal').style.display="block";
   document.getElementById('modal-img').src=img.src;
@@ -233,6 +261,9 @@ function openModal(img){
 function closeModal(){
   document.getElementById('modal').style.display="none";
 }
+
+// Automatikus státusz frissítés (pl. új tételek esetén)
+setInterval(updateStatusCount, 5000);
 </script>
 
 </body>
