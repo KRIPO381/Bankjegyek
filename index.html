@@ -19,7 +19,7 @@ h1 {
   margin-bottom: 15px;
 }
 
-/* === ÚJ: gombok === */
+/* === GOMBOK === */
 .sort-buttons {
   text-align: center;
   margin-bottom: 30px;
@@ -61,16 +61,8 @@ h1 {
 
 .info p strong { color: #000; }
 
-.info .orszag span {
-  font-weight: 700;
-  color: #1E5BAB;
-}
-
-.info .ar span {
-  font-weight: 700;
-  color: #ff0000;
-}
-
+.info .orszag span { font-weight: 700; color: #1E5BAB; }
+.info .ar span { font-weight: 700; color: #ff0000; }
 .status-value { color: #006400; font-weight: 700; }
 
 .statusz {
@@ -88,13 +80,11 @@ h1 {
   gap: 12px;
   position: relative;
 }
-
 .images img {
   width: 45%;
   border-radius: 8px;
   cursor: pointer;
 }
-
 .images .watermark {
   position: absolute;
   top: 50%;
@@ -133,10 +123,11 @@ h1 {
 
 <h1>Eladó Bankjegyeim</h1>
 
-<!-- ✅ ÚJ GOMBOK -->
+<!-- GOMBOK -->
 <div class="sort-buttons">
   <button onclick="sortByCountry()">Országok (ABC)</button>
   <button onclick="sortByPrice()">Árak (emelkedő)</button>
+  <button onclick="sortByOriginal()">Feltöltési időrend</button>
 </div>
 
 <div id="gallery"></div>
@@ -147,21 +138,25 @@ h1 {
 </div>
 
 <script>
+let cards = [];
+
 fetch('bankjegyek.csv')
   .then(res => res.text())
   .then(data => {
     const rows = data.replace(/\r/g, '').trim().split('\n').slice(1);
     const gallery = document.getElementById('gallery');
 
-    rows.forEach(row => {
+    rows.forEach((row, index) => {
       const [sorsz, orszag, cimlet, ev, allapot, leiras, ar, statusz, elolap, hatlap] = row.split(';');
       if (!orszag) return;
 
       const card = document.createElement('div');
       card.className = 'banknote';
 
+      // Metaadatok
       card.dataset.country = orszag.toLowerCase();
       card.dataset.price = parseFloat(ar.replace(/[^\d]/g, '')) || 0;
+      card.dataset.original = index;
 
       const isSold = statusz.trim().toUpperCase() === "ELKELT";
 
@@ -183,6 +178,7 @@ fetch('bankjegyek.csv')
         </div>
       `;
       gallery.appendChild(card);
+      cards.push(card);
     });
   });
 
@@ -197,6 +193,13 @@ function sortByPrice() {
   const gallery = document.getElementById('gallery');
   [...gallery.children]
     .sort((a,b) => a.dataset.price - b.dataset.price)
+    .forEach(el => gallery.appendChild(el));
+}
+
+function sortByOriginal() {
+  const gallery = document.getElementById('gallery');
+  [...gallery.children]
+    .sort((a,b) => (a.dataset.original || 0) - (b.dataset.original || 0))
     .forEach(el => gallery.appendChild(el));
 }
 
