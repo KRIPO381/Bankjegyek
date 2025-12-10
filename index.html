@@ -22,18 +22,18 @@ h1 {
   margin-bottom: 15px;
 }
 
-/* Diszkrét összeg gomb */
+/* Diszkrét összeg gomb – még visszafogottabb */
 #sum-button {
-  background:#e0e0e0;
-  color:#333;
+  background:#f1f3f6;  /* szinte a háttérrel azonos */
+  color:#555;           /* halvány sötétszürke */
   border:none;
-  border-radius:4px;
-  padding:2px 6px;
-  font-size:0.9em;
+  border-radius:3px;
+  padding:1px 4px;      /* apró gomb */
+  font-size:0.8em;      /* kisebb betűméret */
   cursor:pointer;
   font-weight:bold;
 }
-#sum-button:hover { background:#d0d0d0; }
+#sum-button:hover { background:#e8e8e8; }
 #sum-display { font-weight:600; margin-left:5px; }
 
 /* Rendező gombok */
@@ -148,7 +148,7 @@ h1 {
 
 <div id="modal" class="modal" onclick="closeModal()">
   <span class="close">&times;</span>
-  <img id="modal-img" alt="">
+  <img id="modal-img">
 </div>
 
 <script>
@@ -209,7 +209,7 @@ function sortByOriginal(){
   [...g.children].sort((a,b)=>a.dataset.original-b.dataset.original).forEach(e=>g.appendChild(e));
 }
 
-// Összesített ár számolása csak elérhető tételekre
+// Összegzés csak az elérhető tételekre
 let sumVisible=false;
 document.getElementById('sum-button').onclick=()=>{
   const d=document.getElementById('sum-display');
@@ -217,14 +217,11 @@ document.getElementById('sum-button').onclick=()=>{
     d.textContent=''; 
     sumVisible=false; 
   } else {
-    let total=0;
+    let t=0;
     [...document.getElementById('gallery').children].forEach(c=>{
-      const isSold = c.querySelector('.statusz').classList.contains('elkelt');
-      if(!isSold){
-        total += parseFloat(c.dataset.price)||0;
-      }
+      if(c.querySelector('.statusz.elerheto')) t += parseFloat(c.dataset.price)||0;
     });
-    d.textContent=total.toLocaleString('hu-HU')+' Ft';
+    d.textContent=t.toLocaleString('hu-HU')+' Ft';
     sumVisible=true;
   }
 };
