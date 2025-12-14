@@ -8,7 +8,7 @@ Sorszam;Orszag;Cimlet;Evjarat;Allapot;Leiras;Ar;Statusz;Elolap;Hatlap
 7;Ausztria;50 schilling;1970;UNC;utolsó db.;5.900.-Ft;ELKELT;007_front.jpg;007_back.jpg
 8;Laos;1 kip;1957;UNC;utolsó db.;7.900.-Ft;elérhető;008_front.jpg;008_back.jpg
 9;Svédország;5 korona;1952;UNC;utolsó db.;4000.-Ft;ELKELT;009_front.jpg;009_back.jpg
-10;Svédország;1 korona ;1915;UNC;utolsó db.;16.900.-Ft;elérhető;010_front.jpg;010_back.jpg
+10;Svédország;1 korona ;1915;UNC;utolsó db.;16.900.-Ft;ELKELT;010_front.jpg;010_back.jpg
 11;Abházia;10 apsar;2024;UNC;utolsó db.;1750.-Ft;elérhető;011_front.jpg;011_back.jpg
 12;Algéria;2000 frank;2011;UNC;utolsó db.;7900.-Ft;elérhető;012_front.jpg;012_back.jpg
 13;Tunézia ;5 dinár;1980;UNC;utolsó db.;6500.-Ft;elérhető;013_front.jpg;013_back.jpg
@@ -59,15 +59,15 @@ Sorszam;Orszag;Cimlet;Evjarat;Allapot;Leiras;Ar;Statusz;Elolap;Hatlap
 58;Malaya Brit Borneo;1 dollár;1959;VF;Ritka;8900.-Ft;elérhető;058_front.jpg;058_back.jpg
 59;Svédország;10 korona;1916;VF- ;utolsó db.;3990.-Ft;ELKELT;059_front.jpg;059_back.jpg
 60;Svédország;5 korona;1916;VF-;utolsó db.;3990.-Ft;ELKELT;060_front.jpg;060_back.jpg
-61;Olaszország;5000 lira;1985;VF;nagyon szép;900.-Ft;elérhető;061_front.jpg;061_back.jpg
+61;Olaszország;5000 lira;1985;VF;nagyon szép;900.-Ft;ELKELT;061_front.jpg;061_back.jpg
 62;Törökország;2 ½ lira;1930;gyenge;RITKA;2900.-Ft;elérhető;062_front.jpg;062_back.jpg
 63;Spanyolország;100 peseta;1953;VG-F;szép;800.-Ft;elérhető;063_front.jpg;063_back.jpg
 64;Tunézia ;10 dinár;1986;F;ritkább;1500.-Ft;elérhető;064_front.jpg;064_back.jpg
-65;Hollandia;5 gulden;1966;F+;szép;1500.-Ft;elérhető;065_front.jpg;065_back.jpg
+65;Hollandia;5 gulden;1966;F+;szép;1500.-Ft;ELKELT;065_front.jpg;065_back.jpg
 66;Málta;5 lira;1967;VF;nagyon szép;3800.-Ft;elérhető;066_front.jpg;066_back.jpg
 67;Dánia;50 korona;2005;EF;extra szép ropogós;3500.-Ft;elérhető;067_front.jpg;067_back.jpg
 68;Dánia;100 korona;2005;VF;nagyon szép;5500.-Ft;elérhető;068_front.jpg;068_back.jpg
-69;Svédország;50 korona;2015;VF;nagyon szép;2500.-Ft;elérhető;069_front.jpg;069_back.jpg
+69;Svédország;50 korona;2015;VF;nagyon szép;2500.-Ft;ELKELT;069_front.jpg;069_back.jpg
 70;Hongkong;50 dollár;1990;F;szép;1900.-Ft;elérhető;070_front.jpg;070_back.jpg
 71;Lengyelország;2 złoty;1936;szép;pici beszakadás;1500.-Ft;elérhető;071_front.jpg;071_back.jpg
 72;Olaszország;10 lira ;1939;szép;gyenge papír;1000.-Ft;elérhető;072_front.jpg;072_back.jpg
@@ -76,9 +76,9 @@ Sorszam;Orszag;Cimlet;Evjarat;Allapot;Leiras;Ar;Statusz;Elolap;Hatlap
 75;Szerbia;100 dinár;1941;F-;szép;900.-Ft;elérhető;075_front.jpg;075_back.jpg
 76;Ausztria;20 schilling;1950;VF;nagyon szép;9900.-Ft;ELKELT;076_front.jpg;076_back.jpg
 77;Spanyolország;5000 peseta;1979;F-;felül beszakadás;4900.-Ft;elérhető;077_front.jpg;077_back.jpg
-78;Spanyolország;2000 peseta;1980;VF-;nagyon szép;3000.-Ft;elérhető;078_front.jpg;078_back.jpg
+78;Spanyolország;2000 peseta;1980;VF-;nagyon szép;3000.-Ft;ELKELT;078_front.jpg;078_back.jpg
 79;Ausztria;20 schilling;1945;F-;szép;1000.-Ft;elérhető;079_front.jpg;079_back.jpg
-80;Kenya;20 shiling;2004;VF+;nagyon szép;790.-Ft;elérhető;080_front.jpg;080_back.jpg
+80;Kenya;20 shiling;2004;VF+;nagyon szép;790.-Ft;ELKELT;080_front.jpg;080_back.jpg
 81;Jugoszlávia;½ dinár;1919;F;szép;900.-Ft;elérhető;081_front.jpg;081_back.jpg
 82;Kolumbia;10000 peso;2002;F+;nagyon szép;1000.-Ft;elérhető;082_front.jpg;082_back.jpg
 83;India;10 rupia;1992;VF;tűző lyuk;890.-Ft;elérhető;083_front.jpg;083_back.jpg
@@ -95,7 +95,7 @@ Sorszam;Orszag;Cimlet;Evjarat;Allapot;Leiras;Ar;Statusz;Elolap;Hatlap
 94;USA Military;5 dirhams;1946;F+;szép;1500.-Ft;elérhető;094_front.jpg;094_back.jpg
 95;Kina;10 cent;1930;F;szép;1900.-Ft;elérhető;095_front.jpg;095_back.jpg
 96;Albánia;100 franga;1940;VF-;nagyon szép, Ritka;9900.-Ft;ELKELT;096_front.jpg;096_back.jpg
-97;Magyarország;1 gulden;1866;F-;nagyon szép, oldalt beszakadás;14.000.-Ft;elérhető;097_front.jpg;097_back.jpg
+97;Magyarország;1 gulden;1866;F-;nagyon szép, oldalt beszakadás;14.000.-Ft;ELKELT;097_front.jpg;097_back.jpg
 98;Magyarország;5 gulden;1866;F+;nagyon szép, saroknál kis beszakadás;69.000.-Ft;ELKELT;098_front.jpg;098_back.jpg
 99;Lengyelország;20 złoty;1940;VG;szép;700.-Ft;elérhető;099_front.jpg;099_back.jpg
 100;Lengyelország;20 márka;1919;F-;szép;1000.-Ft;elérhető;100_front.jpg;100_back.jpg
@@ -118,4 +118,4 @@ Sorszam;Orszag;Cimlet;Evjarat;Allapot;Leiras;Ar;Statusz;Elolap;Hatlap
 117;Jugoszlávia;1 dinár / 4 krune;1919;F-;szép;900.-Ft;elérhető;117_front.jpg;117_back.jpg
 118;Tunézia ;1 font;1996;F;szép;900.-Ft;elérhető;118_front.jpg;118_back.jpg
 119;Kanada;1 dollár;1973;VF;nagyon szép;990.-Ft;elérhető;119_front.jpg;119_back.jpg
-120;Spanyolország;1000 peseta;1192;VF;nagyon szép;900.-Ft;elérhető;120_front.jpg;120_back.jpg
+120;Spanyolország;1000 peseta;1192;VF;nagyon szép;900.-Ft;ELKELT;120_front.jpg;120_back.jpg
