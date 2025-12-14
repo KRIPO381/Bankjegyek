@@ -40,7 +40,7 @@ Sorszam;Orszag;Cimlet;Evjarat;Allapot;Leiras;Ar;Statusz;Elolap;Hatlap
 39;Csehszlovákia;100 korona;1945;szép;ritkább;4900.-Ft;elérhető;039_front.jpg;039_back.jpg
 40;Spanyolország;500 peseta;1971;szép;felül beszakadás;2500.-Ft;elérhető;040_front.jpg;040_back.jpg
 41;Luxemburg;100 frank;1986;VF;nagyon szép;2500.-Ft;elérhető;041_front.jpg;041_back.jpg
-42;Mauritius;10 rupia;1967;F;Ritka;7900.-Ft;elérhető;042_front.jpg;042_back.jpg
+42;Mauritius;10 rupia;1967;F;Ritka;7900.-Ft;ELKELT;042_front.jpg;042_back.jpg
 43;Francia Egyenlítői-Afrika;50 frank;1947;VG;Ritka;8900.-Ft;ELKELT;043_front.jpg;043_back.jpg
 44;Francia Egyenlítői-Afrika;5 frank;1942;VG;Ritka;8900.-Ft;elérhető;044_front.jpg;044_back.jpg
 45;Etiópia;100 birr;2023;UNC;Több db. elérhető;1000.-Ft;elérhető;045_front.jpg;045_back.jpg
@@ -103,7 +103,7 @@ Sorszam;Orszag;Cimlet;Evjarat;Allapot;Leiras;Ar;Statusz;Elolap;Hatlap
 102;Olaszország;1000 lira;1990;UNC;több db, akár sorok;650.-Ft;elérhető;102_front.jpg;102_back.jpg
 103;Irak;250 dinár;2003;UNC;több db, akár sorok;190.-Ft;elérhető;103_front.jpg;103_back.jpg
 104;Spanyolország;1000 peseta;1979;F-;szép;900.-Ft;elérhető;104_front.jpg;104_back.jpg
-105;Kenya;20 shiling;1993;VF+;nagyon szép;600.-Ft;elérhető;105_front.jpg;105_back.jpg
+105;Kenya;20 shiling;1993;VF+;nagyon szép;600.-Ft;ELKELT;105_front.jpg;105_back.jpg
 106;Izrael;1 sheqel;1978;F;szép;600.-Ft;elérhető;106_front.jpg;106_back.jpg
 107;Németország;10 márka;1906;VG;szép;900.-Ft;elérhető;107_front.jpg;107_back.jpg
 108;Ecuador;100 sucres;1990;EF;nagyon szép ropogós;1000.-Ft;elérhető;108_front.jpg;108_back.jpg
@@ -119,3 +119,5 @@ Sorszam;Orszag;Cimlet;Evjarat;Allapot;Leiras;Ar;Statusz;Elolap;Hatlap
 118;Tunézia ;1 font;1996;F;szép;900.-Ft;elérhető;118_front.jpg;118_back.jpg
 119;Kanada;1 dollár;1973;VF;nagyon szép;990.-Ft;elérhető;119_front.jpg;119_back.jpg
 120;Spanyolország;1000 peseta;1192;VF;nagyon szép;900.-Ft;ELKELT;120_front.jpg;120_back.jpg
+121;Albánia;10 leke;1976;UNC;utolsó db.;1000.-Ft;ELKELT;121_front.jpg;121_back.jpg
+122;Szerbia;500 dinár;1942;UNC;utolsó db.;4900.-Ft;ELKELT;122_front.jpg;122_back.jpg
