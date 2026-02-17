@@ -2,7 +2,7 @@
 1;Németország;100 márka;1908;UNC;Több db. elérhető;3500.-Ft;elérhető;001_front.jpg;001_back.jpg
 2;Magyarország;50 korona;1914;UNC;tökéletesen hajtatlan, felülbélyegzés nélkül! RITKA;44.900.-Ft;ELKELT;002_front.jpg;002_back.jpg
 3;Svédország;50 korona;1989;UNC;utolsó db.;5900.-Ft;elérhető;003_front.jpg;003_back.jpg
-4;Németország;5 márka;1917;UNC;utolsó db.;2900.-Ft;elérhető;004_front.jpg;004_back.jpg
+4;Németország;5 márka;1917;UNC;utolsó db.;2900.-Ft;ELKELT;004_front.jpg;004_back.jpg
 5;Franciaország;500 frank;1994;UNC;utolsó db.;12.900.-Ft;ELKELT;005_front.jpg;005_back.jpg
 6;Thaiföld;1 bath;1955;UNC;utolsó db.;3000.-Ft;elérhető;006_front.jpg;006_back.jpg
 7;Ausztria;50 schilling;1970;UNC;utolsó db.;5.900.-Ft;ELKELT;007_front.jpg;007_back.jpg
@@ -14,14 +14,14 @@
 13;Tunézia ;5 dinár;1980;UNC;utolsó db.;6500.-Ft;elérhető;013_front.jpg;013_back.jpg
 14;Franciaország;5 frank;1966;UNC-;tűzőkapocs lyuk, ahogy nagyon sok példányon;16.900.-Ft;elérhető;014_front.jpg;014_back.jpg
 15;Brazília;2 reais;2010;UNC;Több db. elérhető;350.-Ft;elérhető;015_front.jpg;015_back.jpg
-16;Brazília;10 reais;2010;UNC;utolsó db.;1000.-Ft;elérhető;016_front.jpg;016_back.jpg
+16;Brazília;10 reais;2010;UNC;utolsó db.;1000.-Ft;ELKELT;016_front.jpg;016_back.jpg
 17;Malaya;10 cent;1941;UNC;Ritka;17.900.-Ft;elérhető;017_front.jpg;017_back.jpg
 18;Franciaország;50 frank;1981;nagyon szép;hajtott;2900.-Ft;elérhető;018_front.jpg;018_back.jpg
 19;Egyiptom;100 font;1992;UNC;utolsó db.;9900.-Ft;elérhető;019_front.jpg;019_back.jpg
 20;Románia;1000 lei;1998;UNC;Több db. elérhető;1000.-Ft;elérhető;020_front.jpg;020_back.jpg
 21;Ausztria;100 schilling;1949;nagyon szép;Ritka;25.900.-Ft;ELKELT;021_front.jpg;021_back.jpg
 22;Ausztria;100 schilling;1953;UNC;Több db. elérhető;6900.-Ft;elérhető;022_front.jpg;022_back.jpg
-23;Ausztria;1000 schilling;1961;nagyon szép;Ritka;22.900.-Ft;elérhető;023_front.jpg;023_back.jpg
+23;Ausztria;1000 schilling;1961;nagyon szép;Ritka;22.900.-Ft;ELKELT;023_front.jpg;023_back.jpg
 24;Ausztria;100 schilling;1968;extra szép;Több db. elérhető;5900.-Ft;elérhető;024_front.jpg;024_back.jpg
 25;Ausztria;500 schilling;1953;szép;Ritka;32.000.-Ft;ELKELT;025_front.jpg;025_back.jpg
 26;Málta;5 lira;1967;szép;Ritka;8900.-Ft;elérhető;026_front.jpg;026_back.jpg
@@ -43,7 +43,7 @@
 42;Mauritius;10 rupia;1967;F;Ritka;7900.-Ft;ELKELT;042_front.jpg;042_back.jpg
 43;Francia Egyenlítői-Afrika;50 frank;1947;VG;Ritka;8900.-Ft;ELKELT;043_front.jpg;043_back.jpg
 44;Francia Egyenlítői-Afrika;5 frank;1942;VG;Ritka;5000.-Ft;elérhető;044_front.jpg;044_back.jpg
-45;Etiópia;100 birr;2023;UNC;Több db. elérhető;1000.-Ft;elérhető;045_front.jpg;045_back.jpg
+45;Etiópia;100 birr;2023;UNC;Több db. elérhető;1000.-Ft;ELKELT;045_front.jpg;045_back.jpg
 46;Svédország;10 korona;1968;UNC;Több db. elérhető;3500.-Ft;elérhető;046_front.jpg;046_back.jpg
 47;Izland;10 korona;1961;F;szép;1000.-Ft;elérhető;047_front.jpg;047_back.jpg
 48;Francia Guyana;523 schilling;1947;VG-F;Ritka;9900.-Ft;ELKELT;048_front.jpg;048_back.jpg
@@ -108,7 +108,7 @@
 107;Németország;10 márka;1906;VG;szép;900.-Ft;elérhető;107_front.jpg;107_back.jpg
 108;Ecuador;100 sucres;1990;EF;nagyon szép ropogós;1000.-Ft;elérhető;108_front.jpg;108_back.jpg
 109;Kanada;2 dollár;1974;VF+;nagyon szép;1900.-Ft;elérhető;109_front.jpg;109_back.jpg
-110;Kelet Karibi Államok;1 dollár;1965;F-;szép;700.-Ft;elérhető;110_front.jpg;110_back.jpg
+110;Kelet Karibi Államok;1 dollár;1965;F-;utolsó db.;700.-Ft;elérhető;110_front.jpg;110_back.jpg
 111;Olaszország;1 lira;1914;VG;szép;900.-Ft;elérhető;111_front.jpg;111_back.jpg
 112;Szlovénia / Maribor;20 vinarjev;1919;VG;szép;900.-Ft;elérhető;112_front.jpg;112_back.jpg
 113;Oroszország / Ukrajna;bélyegpénzek;1915;F;A 6 db együtt;3900.-Ft;elérhető;113_front.jpg;113_back.jpg
